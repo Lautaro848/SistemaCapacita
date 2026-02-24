@@ -42,7 +42,7 @@ const postLogin = async (req, res) => {
 
   } catch (error) {
     console.error('Error en login:', error);
-    return res.render('login', { error: 'Error interno. Intentá de nuevo.' });
+    return res.render('login', { error: error.message });  
   }
 };
 
