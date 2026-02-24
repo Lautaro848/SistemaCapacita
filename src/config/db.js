@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-  host:     process.env.DB_HOST     || 'localhost',
-  user:     process.env.DB_USER     || 'u952083334_Admin',
-  password: process.env.DB_PASSWORD || 'cXlxh]1AA',
-  database: process.env.DB_NAME     || 'u952083334_sistemCapacita',
+  host:     'localhost',
+  user:     'u952083334_Admin',
+  password: 'cXlxh]1AA',
+  database: 'u952083334_sistemCapacita',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -12,10 +12,10 @@ const pool = mysql.createPool({
 
 pool.getConnection((err, connection) => {
   if (err) {
-    console.error('Error al conectar con la base de datos:', err.message);
+    console.error(' Error BD:', err.message);
     return;
   }
-  console.log('Conectado a la base de datos MySQL');
+  console.log(' Conectado a MySQL');
   connection.release();
 });
 

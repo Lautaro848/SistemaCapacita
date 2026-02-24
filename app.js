@@ -1,8 +1,8 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-dotenv.config();
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
