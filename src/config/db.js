@@ -1,13 +1,10 @@
 const mysql = require('mysql2');
-const dotenv = require('dotenv');
-
-dotenv.config();
 
 const pool = mysql.createPool({
-  host:     process.env.DB_HOST,
-  user:     process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host:     process.env.DB_HOST     || 'localhost',
+  user:     process.env.DB_USER     || 'u952083334_Admin',
+  password: process.env.DB_PASSWORD || 'cXlxh]1AA',
+  database: process.env.DB_NAME     || 'u952083334_sistemCapacita',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -15,10 +12,10 @@ const pool = mysql.createPool({
 
 pool.getConnection((err, connection) => {
   if (err) {
-    console.error(' Error al conectar con la base de datos:', err.message);
+    console.error('Error al conectar con la base de datos:', err.message);
     return;
   }
-  console.log(' Conectado a la base de datos MySQL');
+  console.log('Conectado a la base de datos MySQL');
   connection.release();
 });
 
