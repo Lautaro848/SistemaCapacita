@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de capacitaciones — LautaroLB </title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rojo:    #C0392B;
+      --rojo2:   #E74C3C;
+      --gris:    #1a1a1a;
+      --gris2:   #242424;
+      --gris3:   #2f2f2f;
+      --blanco:  #F0EFEB;
+      --texto:   #999;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--gris);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow', sans-serif;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 60px,
+          rgba(255,255,255,0.02) 60px,
+          rgba(255,255,255,0.02) 61px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 60px,
+          rgba(255,255,255,0.02) 60px,
+          rgba(255,255,255,0.02) 61px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      right: -100px;
+      width: 500px;
+      height: 800px;
+      background: linear-gradient(135deg, var(--rojo) 0%, transparent 60%);
+      opacity: 0.12;
+      transform: rotate(15deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: 860px;
+      max-width: 95vw;
+      min-height: 520px;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Panel izquierdo — marca */
+    .brand-panel {
+      width: 42%;
+      background: var(--rojo);
+      background-image: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 20px,
+          rgba(0,0,0,0.08) 20px,
+          rgba(0,0,0,0.08) 21px
+        );
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-panel::after {
+      content: 'D';
+      position: absolute;
+      bottom: -40px;
+      right: -20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 220px;
+      font-weight: 800;
+      color: rgba(0,0,0,0.12);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo .icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(0,0,0,0.2);
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-logo .icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .brand-logo span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .brand-info h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .brand-info p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .brand-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .form-panel {
+      flex: 1;
+      background: var(--gris2);
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-panel h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--blanco);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .form-panel .subtitle {
+      font-size: 13px;
+      color: var(--texto);
+      margin-bottom: 36px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--texto);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--gris3);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 2px solid rgba(255,255,255,0.12);
+      color: var(--blanco);
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .field input:focus {
+      border-color: var(--rojo);
+      background: #2a2a2a;
+    }
+
+    .field input::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .error-msg {
+      background: rgba(192, 57, 43, 0.15);
+      border-left: 3px solid var(--rojo);
+      color: #e07070;
+      font-size: 13px;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+    }
+
+    .btn-login {
+      width: 100%;
+      background: var(--rojo);
+      color: white;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .btn-login:hover  { background: var(--rojo2); }
+    .btn-login:active { transform: scale(0.99); }
+
+    .form-footer {
+      margin-top: 28px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 640px) {
+      .brand-panel { display: none; }
+      .form-panel  { padding: 40px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="brand-panel">
+    <div class="brand-logo">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.5v7L12 19.82 4 15.5v-7L12 4.18z"/>
+        </svg>
+      </div>
+      <span>Durlock</span>
+    </div>
+
+    <div class="brand-info">
+      <h1>Sistema<br/>Capacita</h1>
+      <p>Gestión de aptitudes y capacitaciones del personal. Identificá al empleado correcto para cada tarea.</p>
+    </div>
+
+    <div class="brand-tag">La Pampa — Argentina</div>
+  </div>
+
+  <div class="form-panel">
+    <h2>Acceso al sistema</h2>
+    <p class="subtitle">Ingresá tus credenciales para continuar</p>
+
+    <% if (error) { %>
+      <div class="error-msg">⚠ <%= error %></div>
+    <% } %>
+
+    <form action="/login" method="POST">
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input type="email" name="email" placeholder="usuario@durlock.com" required autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Contraseña</label>
+        <input type="password" name="password" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn-login">Ingresar</button>
+    </form>
+
+    <div class="form-footer">SistemaCapacita v1.0 &nbsp;·&nbsp; Uso interno</div>
+  </div>
+
+</div>
+
+</body>
+</html>

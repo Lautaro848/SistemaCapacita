@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "> Sistema de gestión de capacitaciones y aptitudes para empleados   > **Empresa:** Durlock — La Pampa, Argentina",
   "main": "app.js",
-"scripts": {
-  "start": "node app.js",
-  "dev": "nodemon app.js"
-},
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lautaro848/SistemaCapacita.git"
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Lautaro848/SistemaCapacita#readme",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "dayjs": "^1.11.19",
     "dotenv": "^17.3.1",
     "ejs": "^4.0.1",
