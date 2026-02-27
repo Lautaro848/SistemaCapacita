@@ -19,6 +19,11 @@ app.get('/dashboard', verificarToken, (req, res) => {
   res.render('dashboard', { usuario: req.usuario });
 });
 const PORT = process.env.PORT || 3000;
+
+
+const apiRoutes = require('./src/routes/apiRoutes');
+app.use('/api', apiRoutes);
+
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
 });
