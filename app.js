@@ -24,6 +24,9 @@ const PORT = process.env.PORT || 3000;
 const apiRoutes = require('./src/routes/apiRoutes');
 app.use('/api', apiRoutes);
 
+const empleadosRoutes = require('./src/routes/empleadosRoutes');
+app.use('/', empleadosRoutes);
+
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
 });
