@@ -27,6 +27,9 @@ app.use('/api', apiRoutes);
 const empleadosRoutes = require('./src/routes/empleadosRoutes');
 app.use('/', empleadosRoutes);
 
+const aptitudesRoutes = require('./src/routes/aptitudesRoutes');
+app.use('/', aptitudesRoutes);
+
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
 });
