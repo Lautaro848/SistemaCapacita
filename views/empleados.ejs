@@ -14,8 +14,6 @@
       --verde:#27AE60; --amarillo:#F39C12;
     }
     body { background:var(--gris); font-family:'Barlow',sans-serif; color:var(--blanco); min-height:100vh; display:flex; }
-
-    /* SIDEBAR igual que dashboard */
     .sidebar { width:240px; min-height:100vh; background:var(--gris2); border-right:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; position:fixed; top:0; left:0; z-index:100; }
     .sidebar-logo { padding:28px 24px; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; align-items:center; gap:12px; }
     .sidebar-logo .logo-icon { width:36px; height:36px; background:var(--rojo); display:flex; align-items:center; justify-content:center; }
@@ -36,20 +34,14 @@
     .btn-logout { display:flex; align-items:center; gap:8px; width:100%; padding:9px 14px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); color:var(--texto); font-family:'Barlow',sans-serif; font-size:13px; cursor:pointer; transition:all 0.15s; text-decoration:none; }
     .btn-logout:hover { background:rgba(192,57,43,0.15); border-color:var(--rojo); color:var(--rojo2); }
     .btn-logout svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
-
-    /* MAIN */
     .main { margin-left:240px; flex:1; display:flex; flex-direction:column; }
     .topbar { padding:20px 36px; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:space-between; background:var(--gris2); }
     .topbar h1 { font-family:'Barlow Condensed',sans-serif; font-size:26px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
     .topbar p { font-size:13px; color:var(--texto); margin-top:2px; }
-
     .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; background:var(--rojo); color:white; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; border:none; cursor:pointer; transition:background 0.15s; }
     .btn-primary:hover { background:var(--rojo2); }
     .btn-primary svg { width:16px; height:16px; stroke:white; fill:none; stroke-width:2.5; stroke-linecap:round; }
-
     .content { padding:28px 36px; flex:1; }
-
-    /* FILTROS */
     .filters { display:flex; gap:12px; margin-bottom:24px; align-items:center; }
     .search-box { position:relative; flex:1; max-width:340px; }
     .search-box input { width:100%; background:var(--gris2); border:1px solid rgba(255,255,255,0.08); color:var(--blanco); font-family:'Barlow',sans-serif; font-size:14px; padding:10px 14px 10px 40px; outline:none; transition:border-color 0.2s; }
@@ -57,38 +49,28 @@
     .search-box svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; stroke:var(--texto); fill:none; stroke-width:2; pointer-events:none; }
     .filter-select { background:var(--gris2); border:1px solid rgba(255,255,255,0.08); color:var(--blanco); font-family:'Barlow',sans-serif; font-size:14px; padding:10px 14px; outline:none; cursor:pointer; }
     .filter-select:focus { border-color:var(--rojo); }
-    .btn-filter { padding:10px 18px; background:var(--gris3); border:1px solid rgba(255,255,255,0.08); color:var(--texto); font-family:'Barlow',sans-serif; font-size:13px; cursor:pointer; transition:all 0.15s; }
+    .btn-filter { padding:10px 18px; background:var(--gris3); border:1px solid rgba(255,255,255,0.08); color:var(--texto); font-family:'Barlow',sans-serif; font-size:13px; cursor:pointer; transition:all 0.15s; text-decoration:none; }
     .btn-filter:hover { color:var(--blanco); border-color:rgba(255,255,255,0.2); }
-
-    /* GRID EMPLEADOS */
     .empleados-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
-
     .emp-card { background:var(--gris2); border:1px solid rgba(255,255,255,0.05); transition:border-color 0.2s, transform 0.2s; animation:fadeUp 0.4s ease both; }
     .emp-card:hover { border-color:rgba(255,255,255,0.12); transform:translateY(-2px); }
-
     @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-
     .emp-card-top { padding:24px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,0.05); }
-
     .emp-foto { width:56px; height:56px; object-fit:cover; flex-shrink:0; }
     .emp-foto-placeholder { width:56px; height:56px; background:var(--rojo); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:700; color:white; flex-shrink:0; }
-
     .emp-info { flex:1; min-width:0; }
     .emp-nombre { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .emp-legajo { font-size:12px; color:var(--texto); margin-top:3px; letter-spacing:1px; }
-
     .emp-card-body { padding:16px 24px; }
     .emp-aptitudes { display:flex; flex-wrap:wrap; gap:6px; min-height:28px; }
     .apt-tag { background:rgba(192,57,43,0.12); border:1px solid rgba(192,57,43,0.2); color:var(--rojo2); font-size:11px; font-weight:600; padding:3px 10px; letter-spacing:0.5px; }
     .apt-empty { font-size:12px; color:var(--texto); font-style:italic; }
-
     .emp-card-footer { padding:12px 24px; border-top:1px solid rgba(255,255,255,0.04); display:flex; gap:8px; }
     .btn-edit { flex:1; padding:8px; background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--texto); font-family:'Barlow',sans-serif; font-size:12px; cursor:pointer; transition:all 0.15s; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:6px; }
     .btn-edit:hover { color:var(--blanco); border-color:rgba(255,255,255,0.25); }
     .btn-edit svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; }
     .btn-delete { padding:8px 12px; background:transparent; border:1px solid rgba(192,57,43,0.2); color:rgba(192,57,43,0.6); font-family:'Barlow',sans-serif; font-size:12px; cursor:pointer; transition:all 0.15s; }
     .btn-delete:hover { background:rgba(192,57,43,0.12); color:var(--rojo2); border-color:var(--rojo); }
-
     .empty-state { grid-column:1/-1; text-align:center; padding:64px 32px; color:var(--texto); }
     .empty-state svg { width:48px; height:48px; stroke:var(--texto); fill:none; stroke-width:1.2; margin-bottom:16px; display:block; margin-inline:auto; }
     .empty-state h3 { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:700; text-transform:uppercase; margin-bottom:8px; color:var(--gris4); }
@@ -138,7 +120,6 @@
   </div>
 
   <div class="content">
-    <!-- Filtros -->
     <form method="GET" action="/empleados">
       <div class="filters">
         <div class="search-box">
@@ -168,7 +149,8 @@
       <% } %>
 
       <% empleados.forEach((emp, i) => { %>
-        animation-delay: <%= i * 0.05 %>s        <div class="emp-card-top">
+      <div class="emp-card">
+        <div class="emp-card-top">
           <% if (emp.foto) { %>
             <img src="/uploads/<%= emp.foto %>" alt="<%= emp.nombre %>" class="emp-foto"/>
           <% } else { %>
