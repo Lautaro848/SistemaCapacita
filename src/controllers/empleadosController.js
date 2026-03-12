@@ -54,6 +54,9 @@ const postEmpleado = async (req, res) => {
   const { nombre, apellido, legajo, aptitudes_sel } = req.body;
   const foto = req.file ? req.file.filename : null;
 
+  console.log('[postEmpleado] foto recibida:', foto);
+  console.log('[postEmpleado] req.file:', req.file ? 'presente' : 'null');
+
   try {
     const [result] = await db.query(
       'INSERT INTO empleados (nombre, apellido, legajo, foto) VALUES (?, ?, ?, ?)',
@@ -74,13 +77,13 @@ const postEmpleado = async (req, res) => {
 
     res.redirect('/empleados');
   } catch (error) {
-    console.error(error);
+    console.error('[postEmpleado] ERROR:', error);
     const [aptitudes] = await db.query('SELECT * FROM aptitudes ORDER BY nombre ASC');
     res.render('empleado_form', {
       empleado: null,
       aptitudes,
       usuario: req.usuario,
-      error: error.code === 'ER_DUP_ENTRY' ? 'El legajo ya existe' : 'Error al guardar'
+      error: error.code === 'ER_DUP_ENTRY' ? 'El legajo ya existe' : ('Error al guardar: ' + error.message)
     });
   }
 };
@@ -101,14 +104,21 @@ const putEmpleado = async (req, res) => {
   const { id } = req.params;
   const { nombre, apellido, legajo, aptitudes_sel } = req.body;
 
+  console.log('[putEmpleado] req.file:', req.file ? 'presente' : 'null');
+
   try {
     const [[emp]] = await db.query('SELECT foto FROM empleados WHERE id = ?', [id]);
     let foto = emp.foto;
 
     if (req.file) {
+      // Intentar borrar la foto vieja, pero si falla no importa
       if (foto) {
-        const oldPath = path.join(__dirname, '../../public/uploads', foto);
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+        try {
+          const oldPath = path.join(__dirname, '../../public/uploads', foto);
+          if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+        } catch (e) {
+          console.log('[putEmpleado] No se pudo borrar foto vieja (ignorado):', e.message);
+        }
       }
       foto = req.file.filename;
     }
@@ -131,7 +141,7 @@ const putEmpleado = async (req, res) => {
 
     res.redirect('/empleados');
   } catch (error) {
-    console.error(error);
+    console.error('[putEmpleado] ERROR:', error);
     res.redirect('/empleados');
   }
 };
