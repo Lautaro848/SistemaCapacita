@@ -4,6 +4,8 @@ dotenv.config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const dayjs = require('dayjs');
+const db = require('./src/config/db');
 
 const app = express();
 
@@ -19,20 +21,17 @@ const authRoutes      = require('./src/routes/authRoutes');
 const apiRoutes       = require('./src/routes/apiRoutes');
 const empleadosRoutes = require('./src/routes/empleadosRoutes');
 const aptitudesRoutes = require('./src/routes/aptitudesRoutes');
+const carnetsRoutes   = require('./src/routes/carnetsRoutes');
 const { verificarToken } = require('./src/middlewares/auth');
-const carnetsRoutes = require('./src/routes/carnetsRoutes');
-const db = require('./src/config/db');
-const db = require('./src/config/db');
-const dayjs = require('dayjs');
-app.use('/', carnetsRoutes);
+
 app.use('/', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/', empleadosRoutes);
 app.use('/', aptitudesRoutes);
-
-
+app.use('/', carnetsRoutes);
 
 app.get('/', (req, res) => res.redirect('/login'));
+
 app.get('/tv', async (req, res) => {
   try {
     const [empleados] = await db.query(`
@@ -53,7 +52,6 @@ app.get('/tv', async (req, res) => {
       ORDER BY c.fecha_vencimiento ASC
     `);
 
-    const dayjs = require('dayjs');
     const carnetsPorEmpleado = {};
     carnets.forEach(c => {
       if (!carnetsPorEmpleado[c.empleado_id]) carnetsPorEmpleado[c.empleado_id] = [];
@@ -78,11 +76,12 @@ app.get('/tv', async (req, res) => {
     res.status(500).send('Error: ' + error.message);
   }
 });
+
 app.get('/dashboard', verificarToken, (req, res) => {
   res.render('dashboard', { usuario: req.usuario });
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(` Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
